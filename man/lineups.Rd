@@ -21,3 +21,8 @@ Every player in every matchday squad: starter or sub, minutes, position.
 \description{
 Lineups
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+head(lineups("usc", "2024/25"))
+set_data_dir(NULL)
+}

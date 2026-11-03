@@ -16,3 +16,6 @@ Character vector.
 Lower-cases a name and strips accents, so \code{"Kylian Mbappé"} and
 \code{"kylian mbappe"} match.
 }
+\examples{
+name_key("Kylian Mbapp\u00e9")
+}

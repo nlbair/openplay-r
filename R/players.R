@@ -5,6 +5,8 @@
 #'
 #' @param name A name, or a vector of names.
 #' @return Character vector.
+#' @examples
+#' name_key("Kylian Mbapp\u00e9")
 #' @export
 name_key <- function(name) {
   s <- stringi::stri_trans_general(as.character(name), "Latin-ASCII")
@@ -27,6 +29,10 @@ player_keys <- function() {
 #' @param name What was typed.
 #' @param n Maximum number of suggestions.
 #' @return Character vector of full names.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' suggest_players("Lionel Messsi")
+#' set_data_dir(NULL)
 #' @export
 suggest_players <- function(name, n = 5) {
   key <- name_key(name)
@@ -85,6 +91,11 @@ keep_players <- function(df, ids) {
 #' @param player_id Player ID, instead of a name.
 #' @param per90 Divide every count by minutes played and multiply by 90.
 #' @return A data frame.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' c <- player_career("Luka Modric")
+#' c[, c("comp", "season", "team", "matches", "goals")]
+#' set_data_dir(NULL)
 #' @export
 player_career <- function(player = NULL, player_id = NULL, per90 = FALSE) {
   if (is.null(player) && is.null(player_id)) stop("player_career() needs a full player name or a player_id, for example player_career('Lionel Messi')", call. = FALSE)

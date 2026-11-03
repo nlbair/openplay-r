@@ -17,3 +17,8 @@ A data frame with match id, date, teams and score where known.
 \description{
 Played matches with no event data
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+known_gaps("nla", "2022/23")
+set_data_dir(NULL)
+}

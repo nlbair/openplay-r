@@ -12,3 +12,8 @@ A data frame with code, name, type, seasons and whether each competition is in t
 \description{
 All competitions
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+competitions()
+set_data_dir(NULL)
+}

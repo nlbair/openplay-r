@@ -17,3 +17,8 @@ One row per team per match, with the same counts plus goals, xG and shots agains
 \description{
 Team match stats
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+head(team_match_stats("usc")[, c("match_id", "team_id", "goals_for", "xg", "possession_pct")])
+set_data_dir(NULL)
+}

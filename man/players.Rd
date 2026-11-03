@@ -12,3 +12,8 @@ One row per player: name, height, weight, estimated birth year, main position, a
 \description{
 Players
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+head(players())
+set_data_dir(NULL)
+}

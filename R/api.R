@@ -5,6 +5,8 @@
 #'
 #' @param season A season label, or a vector of them.
 #' @return Character vector of stored season codes.
+#' @examples
+#' normalize_season(c("2024/25", "2024-2025", "2022"))
 #' @export
 normalize_season <- function(season) {
   s <- trimws(as.character(season))
@@ -44,6 +46,10 @@ check_coverage <- function(comp, season, ids = NULL) {
 #' All competitions
 #'
 #' @return A data frame with code, name, type, seasons and whether each competition is in the v1 scope.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' competitions()
+#' set_data_dir(NULL)
 #' @export
 competitions <- function() read_table("competitions")
 
@@ -57,6 +63,10 @@ competitions <- function() read_table("competitions")
 #' @param season Season(s), or `NULL` for all.
 #' @param warn Whether to warn about gaps and data issues.
 #' @return A data frame.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' coverage_report("nla", "2022/23", warn = FALSE)
+#' set_data_dir(NULL)
 #' @export
 coverage_report <- function(comp = NULL, season = NULL, warn = TRUE) {
   cov <- read_csv_table("coverage.csv", comp, season)
@@ -73,6 +83,10 @@ coverage_report <- function(comp = NULL, season = NULL, warn = TRUE) {
 #'
 #' @inheritParams coverage_report
 #' @return A data frame with match id, date, teams and score where known.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' known_gaps("nla", "2022/23")
+#' set_data_dir(NULL)
 #' @export
 known_gaps <- function(comp = NULL, season = NULL) read_csv_table("known_gaps.csv", comp, season)
 
@@ -82,6 +96,10 @@ known_gaps <- function(comp = NULL, season = NULL) read_csv_table("known_gaps.cs
 #'
 #' @inheritParams coverage_report
 #' @return A data frame.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' data_issues()
+#' set_data_dir(NULL)
 #' @export
 data_issues <- function(comp = NULL, season = NULL) read_csv_table("data_issues.csv", comp, season)
 
@@ -90,6 +108,10 @@ data_issues <- function(comp = NULL, season = NULL) read_csv_table("data_issues.
 #' @inheritParams coverage_report
 #' @param in_scope_only Keep only competitions in the v1 scope.
 #' @return One row per match with teams, scores, venue, referee, managers and formations.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' head(matches("usc"))
+#' set_data_dir(NULL)
 #' @export
 matches <- function(comp = NULL, season = NULL, in_scope_only = FALSE) {
   df <- read_table("matches", comp, season)
@@ -109,6 +131,11 @@ matches <- function(comp = NULL, season = NULL, in_scope_only = FALSE) {
 #' @param player Full player name to keep (capitals and accents are ignored). A misspelling gets a "did you mean" warning.
 #' @param player_id Player ID(s), instead of a name.
 #' @return A data frame.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' e <- events("usc", "2024/25", columns = c("minute", "player", "type", "x", "y"))
+#' head(e)
+#' set_data_dir(NULL)
 #' @export
 events <- function(comp, season = NULL, columns = NULL, player = NULL, player_id = NULL) {
   ids <- player_ids(player, player_id)
@@ -138,6 +165,11 @@ events <- function(comp, season = NULL, columns = NULL, player = NULL, player_id
 #' @param player Full player name to keep (capitals and accents are ignored). A misspelling gets a "did you mean" warning.
 #' @param player_id Player ID(s), instead of a name.
 #' @return Every shot with location, body part, situation, outcome, xG and the player who set it up.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' s <- shots("usc", player = "Lionel Messi")
+#' s[, c("season", "minute", "result", "xg")]
+#' set_data_dir(NULL)
 #' @export
 shots <- function(comp = NULL, season = NULL, player = NULL, player_id = NULL) {
   ids <- player_ids(player, player_id)
@@ -152,6 +184,10 @@ shots <- function(comp = NULL, season = NULL, player = NULL, player_id = NULL) {
 #' @param player Full player name to keep (capitals and accents are ignored). A misspelling gets a "did you mean" warning.
 #' @param player_id Player ID(s), instead of a name.
 #' @return Every player in every matchday squad: starter or sub, minutes, position.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' head(lineups("usc", "2024/25"))
+#' set_data_dir(NULL)
 #' @export
 lineups <- function(comp = NULL, season = NULL, player = NULL, player_id = NULL) {
   ids <- player_ids(player, player_id)
@@ -166,6 +202,11 @@ lineups <- function(comp = NULL, season = NULL, player = NULL, player_id = NULL)
 #' @param player Full player name to keep (capitals and accents are ignored). A misspelling gets a "did you mean" warning.
 #' @param player_id Player ID(s), instead of a name.
 #' @return One row per player per match played, with about 80 counts built from the events.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' p <- player_match_stats("nla", "2022/23", player = "Kylian Mbappe")
+#' p[, c("date", "opponent", "minutes_played", "goals", "xg")]
+#' set_data_dir(NULL)
 #' @export
 player_match_stats <- function(comp = NULL, season = NULL, player = NULL, player_id = NULL) {
   ids <- player_ids(player, player_id)
@@ -178,6 +219,10 @@ player_match_stats <- function(comp = NULL, season = NULL, player = NULL, player
 #'
 #' @inheritParams coverage_report
 #' @return One row per team per match, with the same counts plus goals, xG and shots against.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' head(team_match_stats("usc")[, c("match_id", "team_id", "goals_for", "xg", "possession_pct")])
+#' set_data_dir(NULL)
 #' @export
 team_match_stats <- function(comp = NULL, season = NULL) {
   df <- read_table("team_match_stats", comp, season)
@@ -188,12 +233,20 @@ team_match_stats <- function(comp = NULL, season = NULL) {
 #' Players
 #'
 #' @return One row per player: name, height, weight, estimated birth year, main position, appearances and minutes.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' head(players())
+#' set_data_dir(NULL)
 #' @export
 players <- function() read_table("players")
 
 #' Teams
 #'
 #' @return One row per team: name, country, club or national team, and competitions played.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' head(teams())
+#' set_data_dir(NULL)
 #' @export
 teams <- function() read_table("teams")
 
@@ -201,6 +254,10 @@ teams <- function() read_table("teams")
 #'
 #' @inheritParams coverage_report
 #' @return Every formation a team used in a match, with the minutes it was used.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' head(formations("usc", "2024/25"))
+#' set_data_dir(NULL)
 #' @export
 formations <- function(comp = NULL, season = NULL) {
   df <- read_table("formations")
@@ -212,6 +269,10 @@ formations <- function(comp = NULL, season = NULL) {
 #'
 #' @inheritParams coverage_report
 #' @return Every card shown, with player, team and minute.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' head(cards("usc"))
+#' set_data_dir(NULL)
 #' @export
 cards <- function(comp = NULL, season = NULL) {
   df <- read_table("cards")
@@ -230,6 +291,11 @@ cards <- function(comp = NULL, season = NULL) {
 #' @param player Full player name to keep (capitals and accents are ignored). A misspelling gets a "did you mean" warning.
 #' @param player_id Player ID(s), instead of a name.
 #' @return A data frame.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' s <- player_season_stats("nla", "2022/23", per90 = TRUE, min_minutes = 180)
+#' head(s[order(-s$xg), c("player", "team", "minutes_played", "xg")])
+#' set_data_dir(NULL)
 #' @export
 player_season_stats <- function(comp = NULL, season = NULL, per90 = FALSE, min_minutes = 0, player = NULL, player_id = NULL) {
   ids <- player_ids(player, player_id)

@@ -17,3 +17,8 @@ Every card shown, with player, team and minute.
 \description{
 Cards
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+head(cards("usc"))
+set_data_dir(NULL)
+}

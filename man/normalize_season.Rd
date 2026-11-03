@@ -16,3 +16,6 @@ Character vector of stored season codes.
 \code{"2024/25"}, \code{"2024-25"}, \code{"2024/2025"} and \code{"2425"} all become \code{"2425"}.
 Tournament years such as \code{"2022"} are returned unchanged.
 }
+\examples{
+normalize_season(c("2024/25", "2024-2025", "2022"))
+}

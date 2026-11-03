@@ -24,3 +24,9 @@ A data frame.
 Every event for one or more competition-seasons. \code{comp} is required because
 the full dataset has about 42 million rows.
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+e <- events("usc", "2024/25", columns = c("minute", "player", "type", "x", "y"))
+head(e)
+set_data_dir(NULL)
+}

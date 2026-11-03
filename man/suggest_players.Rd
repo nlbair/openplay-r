@@ -18,3 +18,8 @@ Character vector of full names.
 The full names closest to \code{name}: small spelling mistakes, or names that
 contain every word typed.
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+suggest_players("Lionel Messsi")
+set_data_dir(NULL)
+}

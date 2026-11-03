@@ -21,3 +21,9 @@ Every shot with location, body part, situation, outcome, xG and the player who s
 \description{
 Shots
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+s <- shots("usc", player = "Lionel Messi")
+s[, c("season", "minute", "result", "xg")]
+set_data_dir(NULL)
+}

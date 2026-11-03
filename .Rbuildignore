@@ -1,3 +1,6 @@
 ^LICENSE\.md$
 ^\.git$
 ^\.gitignore$
+^cran-comments\.md$
+^\.github$
+^CRAN-SUBMISSION$

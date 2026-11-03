@@ -6,10 +6,12 @@ Description: Downloads and reads an open repository of men's soccer event data
     (every pass, shot and tackle with pitch coordinates) for the big five European
     leagues, UEFA club competitions and major international tournaments from
     2014/15 onward, with an expected goals value on every shot. Files are
-    downloaded once from a GitHub release, checked against published checksums
-    and cached.
+    downloaded once from a 'GitHub' release, checked against published checksums
+    and cached. Includes season and career summaries and player lookup by full
+    name with spelling suggestions.
 License: MIT + file LICENSE
 Encoding: UTF-8
+Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Depends: R (>= 4.1)

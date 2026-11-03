@@ -33,3 +33,9 @@ A data frame.
 Season totals per player and team, built from \code{\link[=player_match_stats]{player_match_stats()}}. A
 player who moved clubs mid-season gets one row per team.
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+s <- player_season_stats("nla", "2022/23", per90 = TRUE, min_minutes = 180)
+head(s[order(-s$xg), c("player", "team", "minutes_played", "xg")])
+set_data_dir(NULL)
+}

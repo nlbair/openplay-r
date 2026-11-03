@@ -14,6 +14,10 @@ data_tag <- function() Sys.getenv("OPENPLAY_DATA_TAG", "data-v0.1.0")
 #'
 #' @param path Folder path, or `NULL`.
 #' @return The previous setting, invisibly.
+#' @examples
+#' set_data_dir(system.file("extdata", "sample", package = "openplay"))
+#' nrow(competitions())
+#' set_data_dir(NULL)
 #' @export
 set_data_dir <- function(path) {
   old <- .op$data_dir
@@ -67,7 +71,12 @@ http_get <- function(url, dest, accept = NULL) {
   do.call(curl::handle_setheaders, c(list(h), headers))
   tmp <- paste0(dest, ".part")
   on.exit(if (file.exists(tmp)) unlink(tmp), add = TRUE)
-  curl::curl_download(url, tmp, handle = h, quiet = TRUE)
+  ok <- tryCatch({
+    curl::curl_download(url, tmp, handle = h, quiet = TRUE)
+    TRUE
+  }, error = function(e) {
+    stop(sprintf("Could not download %s from GitHub (%s). Check your internet connection, or point set_data_dir() at local copies of the files.", basename(dest), conditionMessage(e)), call. = FALSE)
+  })
   file.rename(tmp, dest)
   dest
 }

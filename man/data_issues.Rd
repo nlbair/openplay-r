@@ -17,3 +17,8 @@ A data frame.
 \description{
 Partial events, incomplete lineups, or events that disagree with the official score.
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+data_issues()
+set_data_dir(NULL)
+}

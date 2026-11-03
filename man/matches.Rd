@@ -19,3 +19,8 @@ One row per match with teams, scores, venue, referee, managers and formations.
 \description{
 Matches
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+head(matches("usc"))
+set_data_dir(NULL)
+}

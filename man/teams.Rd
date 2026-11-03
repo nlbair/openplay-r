@@ -12,3 +12,8 @@ One row per team: name, country, club or national team, and competitions played.
 \description{
 Teams
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+head(teams())
+set_data_dir(NULL)
+}

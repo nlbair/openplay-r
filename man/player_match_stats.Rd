@@ -21,3 +21,9 @@ One row per player per match played, with about 80 counts built from the events.
 \description{
 Player match stats
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+p <- player_match_stats("nla", "2022/23", player = "Kylian Mbappe")
+p[, c("date", "opponent", "minutes_played", "goals", "xg")]
+set_data_dir(NULL)
+}

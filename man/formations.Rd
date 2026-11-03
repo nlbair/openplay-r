@@ -17,3 +17,8 @@ Every formation a team used in a match, with the minutes it was used.
 \description{
 Formations
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+head(formations("usc", "2024/25"))
+set_data_dir(NULL)
+}

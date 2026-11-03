@@ -21,3 +21,9 @@ One row per competition, season and team, oldest first. \code{player} is the
 full name (capitals and accents are ignored). A close misspelling gets a
 "did you mean" warning and an empty result.
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+c <- player_career("Luka Modric")
+c[, c("comp", "season", "team", "matches", "goals")]
+set_data_dir(NULL)
+}

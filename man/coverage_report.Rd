@@ -21,3 +21,8 @@ Matches played, matches with event data, and known gaps. Never errors for
 gaps. With \code{warn = TRUE} it warns when the selection includes matches with
 no event data or with known data issues.
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+coverage_report("nla", "2022/23", warn = FALSE)
+set_data_dir(NULL)
+}

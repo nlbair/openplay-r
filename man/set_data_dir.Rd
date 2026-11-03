@@ -17,3 +17,8 @@ The folder must hold the release files side by side, for example
 \code{matches.parquet} and \code{events_eng_2425.parquet}. Use \code{NULL} to go back to
 downloading from the GitHub release.
 }
+\examples{
+set_data_dir(system.file("extdata", "sample", package = "openplay"))
+nrow(competitions())
+set_data_dir(NULL)
+}
