@@ -1,0 +1,31 @@
+Package: openplay
+Title: Open Men's Soccer Event Data with Expected Goals
+Version: 0.1.0
+Authors@R: person("Noah", "Bair", email = "noahlbair@gmail.com", role = c("aut", "cre"))
+Description: Downloads and reads an open repository of men's soccer event data
+    (every pass, shot and tackle with pitch coordinates) for the big five European
+    leagues, UEFA club competitions and major international tournaments from
+    2014/15 onward, with an expected goals value on every shot. Files are
+    downloaded once from a GitHub release, checked against published checksums
+    and cached.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends: R (>= 4.1)
+Imports:
+    arrow,
+    curl,
+    digest,
+    dplyr,
+    jsonlite,
+    rlang,
+    stats,
+    stringi,
+    tools,
+    utils
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+URL: https://github.com/nlbair/openplay-r, https://github.com/nlbair/openplay
+BugReports: https://github.com/nlbair/openplay-r/issues
